@@ -8,8 +8,8 @@ from itertools import combinations
 import matplotlib.pyplot as plt
 import random
 from db import init_db, zapisz_wyniki_do_bazy, pobierz_wszystkie_wyniki
-import numpy as np
-from sklearn.linear_model import LinearRegression
+#import numpy as np
+#from sklearn.linear_model import LinearRegression
 # 🔐 API klucz (opcjonalny)
 API_KEY = "TWOJ_KLUCZ_API_TUTAJ"
 API_HEADERS = {"accept": "application/json", "secret": API_KEY}
@@ -17,6 +17,8 @@ API_BASE = "https://developers.lotto.pl/api/open/v1/"
 
 # 📎 Stały link do CSV
 STAŁY_CSV_URL = "https://www.wynikilotto.net.pl/download/lotto.csv"
+
+'''
 def trend_regresji(dane, liczba, bloków=10):
     blok_len = len(dane) // bloków
     wyniki = []
@@ -47,6 +49,7 @@ def trend_regresji(dane, liczba, bloków=10):
         st.warning(f"📉 Liczba {liczba} wykazuje trend spadkowy (nachylenie: {slope:.2f})")
     else:
         st.info(f"➖ Brak trendu dla liczby {liczba}")
+'''
 def pobierz_z_api(limit=200, game="Lotto"):
     url = f"{API_BASE}lotteries/draws/latest?gameType={game}&cnt={limit}"
     try:
@@ -206,10 +209,11 @@ def analiza_lotto(wyniki):
     ax.set_ylabel("Liczba wystąpień")
     ax.set_title(f"Ilość wystąpień liczby {wybrana} w kolejnych blokach")
     st.pyplot(fig)
+ '''   
 #Wywolanie regresji
     liczba_regresji = st.number_input("🔢 Liczba do analizy regresji", min_value=1, max_value=49, value=6)
     trend_regresji(wyniki, liczba_regresji)
-
+'''
     st.subheader("🧊 Zimne liczby (najdawniej losowane)")
     ostatnie_wyst = {}
     for i in range(len(df)-1, -1, -1):
