@@ -209,7 +209,7 @@ def analiza_lotto(wyniki):
     ax.set_ylabel("Liczba wystąpień")
     ax.set_title(f"Ilość wystąpień liczby {wybrana} w kolejnych blokach")
     st.pyplot(fig)
- '''   
+'''   
 #Wywolanie regresji
     liczba_regresji = st.number_input("🔢 Liczba do analizy regresji", min_value=1, max_value=49, value=6)
     trend_regresji(wyniki, liczba_regresji)
