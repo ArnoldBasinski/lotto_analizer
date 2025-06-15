@@ -211,14 +211,14 @@ def analiza_lotto(wyniki):
     # 🔥 Zestaw z najczęstszych liczb
     top20 = [l for l, _ in licznik.most_common(20)]
     if len(top20) >= 6:
-        zestaw_popularny = int(sorted(random.sample(top20, 6)))
-        st.write(f"🔥 Zestaw z najczęstszych liczb: **{zestaw_popularny}**")
+        zestaw_popularny = sorted(random.sample(top20, 6)
+        st.write(f"🔥 Zestaw z najczęstszych liczb: **{int(zestaw_popularny)}**")
 
     # ❄️ Zestaw z zimnych liczb
     zimne_all = sorted(ostatnie_wyst.items(), key=lambda x: x[1], reverse=True)
     zimne_top20 = [l for l, _ in zimne_all[:20]]
     if len(zimne_top20) >= 6:
-        zestaw_zimny = int(sorted(random.sample(zimne_top20, 6)))
+        zestaw_zimny = sorted(random.sample(zimne_top20, 6))
         st.write(f"❄️ Zestaw z zimnych liczb: **{zestaw_zimny}**")
 
     st.subheader("📁 Pobierz dane")
