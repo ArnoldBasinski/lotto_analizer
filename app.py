@@ -205,14 +205,17 @@ def analiza_lotto(wyniki):
     rzadkie_sorted = sorted(rzadkie, key=lambda x: x[1])[:10]
     for (a, b, c), ile in rzadkie_sorted:
         st.write(f"Trójka {a}, {b}, {c}: {ile} razy")
+    def konwertuj(lista):
+        return [int(x) for x in lista]
 
     st.subheader("🎯 Propozycja 6 liczb")
 
     # 🔥 Zestaw z najczęstszych liczb
     top20 = [l for l, _ in licznik.most_common(20)]
     if len(top20) >= 6:
-        zestaw_popularny = sorted(random.sample(top20, 6)
-        st.write(f"🔥 Zestaw z najczęstszych liczb: **{int(zestaw_popularny)}**")
+        zestaw_popularny = sorted(random.sample(top20, 6))
+        
+        st.write(f"🔥 Zestaw z najczęstszych liczb: **{konwertuj(zestaw_popularny)}**")
 
     # ❄️ Zestaw z zimnych liczb
     zimne_all = sorted(ostatnie_wyst.items(), key=lambda x: x[1], reverse=True)
@@ -226,6 +229,50 @@ def analiza_lotto(wyniki):
     st.download_button("📥 CSV z wynikami", csv, file_name="wyniki_lotto.csv")
 
 def main():
+    st.set_page_config(
+    page_title="Analiza Wyników Lotto 🎯",   # 🔹 tytuł w zakładce przeglądarki
+    page_icon="🎲",                   # 🔹 favicon (emoji lub URL)
+    layout="wide",                   # opcjonalnie: "centered" lub "wide"
+    initial_sidebar_state="collapsed" # domyślny stan bocznego menu
+)
+    menu = st.sidebar.radio("📂 Nawigacja", ["📊 Analiza", "📘 Pomoc"])
+
+    if menu == "📘 Pomoc":
+       st.title("📘 Pomoc / Instrukcja")
+       st.markdown("""
+    ### Jak korzystać z aplikacji Lotto Analyzer
+
+    1. **Załaduj dane** – automatycznie z sieci lub ręcznie z pliku CSV
+    2. **Przeglądaj statystyki** – liczby, pary, trójki, rozrzut, sumy
+    3. **Oglądaj wykresy** – trendy, rozkłady, histogramy
+    4. **Odbierz sugestie** – aplikacja generuje 6 liczb na podstawie analizy
+
+    ---
+
+    ### Najczęstsze pytania:
+
+    - 🔢 *Co to „zimne liczby”?*  
+      Liczby, które były losowane najrzadziej w historii.
+
+    - 🎲 *Czy sugerowane liczby mają większe szanse?*  
+      Nie – to gra losowa. Ale zestawy bazują na historii.
+
+    - 📥 *Czy mogę wgrać własny plik?*  
+      Tak – wystarczy CSV z 6 kolumnami liczb (bez daty).
+
+    - 💾 *Czy dane są zapisywane?*  
+      Jeśli masz aktywną bazę danych – tak.
+
+    - 🌐 *Czy aplikacja działa mobilnie?*  
+      Tak – responsywna przez przeglądarkę lub aplikację Android.
+
+    ---
+
+    📌 **Domena aplikacji:** [analiza-lotto.onrender.com](https://analiza-lotto.onrender.com)  
+    📧 Wsparcie: TwojEmail@example.com  
+    """)
+
+
     init_db()  # utwórz tabelę, jeśli nie istnieje
     st.title("🎰 Lotto – analiza wyników z wielu źródeł")
 
